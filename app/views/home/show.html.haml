@@ -1,1 +1,23 @@
-%h1 Home
+.calendar
+  .calendar-header
+    = link_to "←", root_path(year: (@date.prev_month).year, month: (@date.prev_month).month)
+    %span= @date.strftime("%B %Y")
+    = link_to "→", root_path(year: (@date.next_month).year, month: (@date.next_month).month)
+
+  .calendar-grid
+    - %w[Sun Mon Tue Wed Thu Fri Sat].each do |day|
+      .calendar-cell.header= day
+
+    - @start_wday.times do
+      .calendar-cell.empty
+
+    - current_day = @date
+    - while current_day <= @end_date
+      .calendar-cell{ id: "day-#{current_day}", data: { date: current_day } }
+        %div.day-number= current_day.day
+        .events
+          .event 
+            Event 1
+          .event
+            Event 2
+      - current_day += 1

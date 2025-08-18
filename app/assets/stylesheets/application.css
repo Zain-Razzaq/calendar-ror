@@ -109,3 +109,74 @@ input {
 .btn:hover {
   opacity: 0.8;
 }
+
+/* Home  */
+.calendar {
+  width: 700px; 
+  margin: 20px auto;
+  border: 1px solid #ccc;
+  background: #fff;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #000;
+  color: #fff;
+  padding: 12px 20px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.calendar-header a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.calendar-cell {
+  border: 1px solid #ddd;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  padding: 6px;
+  box-sizing: border-box;
+}
+
+.calendar-cell.header {
+  min-height: 40px;
+  background: #b0afaf;
+  font-weight: bold;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.day-number {
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.events {
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  min-height: 60px;
+  padding: 2px;
+}
+
+.event{
+  background: #c0c0c0;
+  padding: 4px;
+  margin-bottom: 2px;
+  border-radius: 3px;
+  cursor: pointer;
+}
