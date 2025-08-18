@@ -8,3 +8,104 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+
+
+
+body {
+  background-color: #f5f5f5;
+  color: #000000;
+  font-family: Arial, sans-serif;
+}
+
+.flash {
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+}
+
+.notice {
+  background-color: #dff0d8;
+  color: #50b652;
+}
+
+.alert {
+  background-color: #f2dede;
+  color: #d45856;
+}
+
+h1{
+  text-align: center;
+}
+
+.signup-form {
+  padding: 20px;
+  border: 1px solid #ccc;
+  width: 300px;
+  margin: 50px auto;
+}
+
+.field {
+  margin-bottom: 15px;
+  
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input {
+  width: -webkit-fill-available;
+  padding: 8px;
+  border: 1px solid #999;
+}
+
+.actions {
+  text-align: center;
+}
+
+.actions input {
+  background: #000000;
+  color: #ffffff;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+
+/* Navbar */
+
+.navbar { 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+}
+
+.navbar-left .logo {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.user-email {
+  font-size: 14px;
+}
+
+.btn {
+  color: #ffffff;   
+  background: #000000;      
+  border: 1px solid #ffffff;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  opacity: 0.8;
+}

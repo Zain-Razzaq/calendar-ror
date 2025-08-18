@@ -1,0 +1,13 @@
+%h1 Login
+
+= form_with url: sessions_path, class: 'signup-form', local: true do |f|
+  .field
+    = f.label :email
+    = f.email_field :email
+
+  .field
+    = f.label :password
+    = f.password_field :password
+
+  .actions
+    = f.submit "Login"
