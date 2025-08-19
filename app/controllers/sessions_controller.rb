@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
       session[:user_id]= user.id
       redirect_to root_path, notice: "Logged in successfully."
     else
-      redirect_to root_path, alert: "Invalid email or password."
+      redirect_to login_path, alert: "Invalid email or password."
     end
   end
 
