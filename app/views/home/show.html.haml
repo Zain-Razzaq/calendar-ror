@@ -17,25 +17,54 @@
         .calendar-cell{ id: "day-#{current_day}", data: { date: current_day } }
           %div.day-number= current_day.day
           .events
-            .event{ data: { title: "title #{current_day}", description: "Details of Event 1" } }
-              Event 1
-            .event{ data: { title: "title 2 #{current_day}", description: "Details of Event 2" } }
-              Event 2
+            - if @events_by_date[current_day]
+              - @events_by_date[current_day].each do |event|
+                .event{ 
+                  data: { 
+                    title: event.title, 
+                    desc: event.desc, 
+                    date: event.date, 
+                    start_time: event.start_time, 
+                    end_time: event.end_time 
+                  } 
+                }
+                  = event.title
         - current_day += 1
 
   .side-panels
     #new-event-panel.side-panel.hidden
       %h2 Add New Event
-      %form
-        %label Title
-        %input{ type: "text", name: "title" }
-        %label Date
-        %input{ type: "text", name: "date", readonly: true }
-        %button.btn Add Event
-        %button.btn.close-btn{ type: "button" } Close
+      = form_for @event do |f|
+        .field
+          = f.label :title
+          = f.text_field :title
+
+        .field
+          = f.label :desc
+          = f.text_field :desc
+
+        .field
+          = f.label :start_time
+          = f.time_field :start_time
+
+        .field
+          = f.label :end_time
+          = f.time_field :end_time
+
+        .field
+          = f.label :date
+          = f.date_field :date, readonly: true
+
+        .actions
+          = f.submit "Add Event", class: "btn"
+        .actions
+          %button.btn.close-btn{ type: "button" } Close
 
     #event-details-panel.side-panel.hidden
       %h2 Event Details
       %div#event-title
       %div#event-description
+      %div#event-date
+      %div#event-start-time
+      %div#event-end-time
       %button.btn.close-btn{ type: "button" } Close
