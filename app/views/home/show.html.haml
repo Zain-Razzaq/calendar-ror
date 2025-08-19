@@ -37,19 +37,19 @@
       = form_for @event do |f|
         .field
           = f.label :title
-          = f.text_field :title
+          = f.text_field :title, required: true
 
         .field
           = f.label :desc
-          = f.text_field :desc
+          = f.text_field :desc, required: true
 
         .field
           = f.label :start_time
-          = f.time_field :start_time
+          = f.time_field :start_time, required: true
 
         .field
           = f.label :end_time
-          = f.time_field :end_time
+          = f.time_field :end_time, required: true
 
         .field
           = f.label :date

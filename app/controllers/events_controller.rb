@@ -12,7 +12,7 @@ class EventsController < ApplicationController
       if @event.save
         redirect_to root_path, notice: "Event created successfully"
       else
-        redirect_to root_path, alert: "Event creation failed"
+        redirect_to root_path, alert: @event.errors.full_messages.join(", ")
       end
     rescue => e
       redirect_to root_path, alert: "Event creation failed: #{e.message}"
