@@ -1,23 +1,41 @@
-.calendar
-  .calendar-header
-    = link_to "←", root_path(year: (@date.prev_month).year, month: (@date.prev_month).month)
-    %span= @date.strftime("%B %Y")
-    = link_to "→", root_path(year: (@date.next_month).year, month: (@date.next_month).month)
+%div.calendar-container
+  .calendar
+    .calendar-header
+      = link_to "←", root_path(year: (@date.prev_month).year, month: (@date.prev_month).month)
+      %span= @date.strftime("%B %Y")
+      = link_to "→", root_path(year: (@date.next_month).year, month: (@date.next_month).month)
 
-  .calendar-grid
-    - %w[Sun Mon Tue Wed Thu Fri Sat].each do |day|
-      .calendar-cell.header= day
+    .calendar-grid
+      - %w[Sun Mon Tue Wed Thu Fri Sat].each do |day|
+        .calendar-cell.header= day
 
-    - @start_wday.times do
-      .calendar-cell.empty
+      - @start_wday.times do
+        .calendar-cell.empty
 
-    - current_day = @date
-    - while current_day <= @end_date
-      .calendar-cell{ id: "day-#{current_day}", data: { date: current_day } }
-        %div.day-number= current_day.day
-        .events
-          .event 
-            Event 1
-          .event
-            Event 2
-      - current_day += 1
+      - current_day = @date
+      - while current_day <= @end_date
+        .calendar-cell{ id: "day-#{current_day}", data: { date: current_day } }
+          %div.day-number= current_day.day
+          .events
+            .event{ data: { title: "title #{current_day}", description: "Details of Event 1" } }
+              Event 1
+            .event{ data: { title: "title 2 #{current_day}", description: "Details of Event 2" } }
+              Event 2
+        - current_day += 1
+
+  .side-panels
+    #new-event-panel.side-panel.hidden
+      %h2 Add New Event
+      %form
+        %label Title
+        %input{ type: "text", name: "title" }
+        %label Date
+        %input{ type: "text", name: "date", readonly: true }
+        %button.btn Add Event
+        %button.btn.close-btn{ type: "button" } Close
+
+    #event-details-panel.side-panel.hidden
+      %h2 Event Details
+      %div#event-title
+      %div#event-description
+      %button.btn.close-btn{ type: "button" } Close
