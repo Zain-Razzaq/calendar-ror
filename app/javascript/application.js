@@ -2,7 +2,7 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 
-document.addEventListener("DOMContentLoaded", () => {
+function initializeCalendar() {
   const newEventPanel = document.getElementById("new-event-panel");
   const eventDetailsPanel = document.getElementById("event-details-panel");
 
@@ -58,5 +58,9 @@ document.addEventListener("DOMContentLoaded", () => {
       hidePanels();
     });
   });
+}
 
-});
+document.addEventListener("DOMContentLoaded", initializeCalendar);
+
+document.addEventListener("turbo:load", initializeCalendar);
+document.addEventListener("turbo:render", initializeCalendar);
