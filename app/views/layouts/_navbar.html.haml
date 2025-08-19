@@ -1,6 +1,6 @@
 %nav.navbar
   .navbar-left
-    %div.logo Calendar
+    = link_to "Calendar", root_path, class: "logo"
 
   .navbar-right
     - if current_user
