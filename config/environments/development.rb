@@ -34,6 +34,11 @@ Rails.application.configure do
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
 
+  # My code #########################################################
+  config.action_mailer.delivery_method = :letter_opener
+  config.action_mailer.perform_deliveries = true
+  # My code #########################################################
+
   # Make template changes take effect immediately.
   config.action_mailer.perform_caching = false
 

@@ -1,0 +1,16 @@
+%h1 
+  An event is created for
+  = @event.title
+%p 
+  Description:
+  = @event.desc
+%h3 
+  Date:
+  = @event.date
+%p
+  Start time: 
+  = @event.start_time.strftime("%I:%M %p")
+
+%p
+  End time: 
+  = @event.end_time.strftime("%I:%M %p")

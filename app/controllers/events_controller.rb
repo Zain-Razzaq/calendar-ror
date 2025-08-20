@@ -1,6 +1,10 @@
 class EventsController < ApplicationController
   def create
     begin
+      if !current_user
+        redirect_to login_path, alert: "Login first"
+        return
+      end
       @event = Event.new(event_params)
       @event.user = current_user
 
@@ -10,6 +14,7 @@ class EventsController < ApplicationController
       end
 
       if @event.save
+        UserMailer.eventCreationMailer(@event).deliver
         redirect_to root_path, notice: "Event created successfully"
       else
         redirect_to root_path, alert: @event.errors.full_messages.join(", ")
