@@ -1,17 +1,9 @@
 class EventsController < ApplicationController
+  before_action :require_user, only: [ :create ]
+
   def create
-    begin
-      if !current_user
-        redirect_to login_path, alert: "Login first"
-        return
-      end
       @event = Event.new(event_params)
       @event.user = current_user
-
-      if @event.end_time <= @event.start_time
-        redirect_to root_path, alert: "End time should be after start time"
-        return
-      end
 
       if @event.save
         UserMailer.eventCreationMailer(@event).deliver
@@ -19,9 +11,6 @@ class EventsController < ApplicationController
       else
         redirect_to root_path, alert: @event.errors.full_messages.join(", ")
       end
-    rescue => e
-      redirect_to root_path, alert: "Event creation failed: #{e.message}"
-    end
   end
 
 

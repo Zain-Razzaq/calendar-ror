@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root "home#show"
+  root "home#index"
 
   get "login", to: "sessions#new", as: "login"
   delete "logout", to: "sessions#destroy", as: "logout"
