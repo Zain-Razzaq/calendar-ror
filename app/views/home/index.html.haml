@@ -1,70 +1,26 @@
-%div.calendar-container
-  .calendar
-    .calendar-header
-      = link_to "←", root_path(year: (@date.prev_month).year, month: (@date.prev_month).month)
-      %span= @date.strftime("%B %Y")
-      = link_to "→", root_path(year: (@date.next_month).year, month: (@date.next_month).month)
-
-    .calendar-grid
-      - %w[Sun Mon Tue Wed Thu Fri Sat].each do |day|
-        .calendar-cell.header= day
-
-      - @start_wday.times do
-        .calendar-cell.empty
-
-      - current_day = @date
-      - while current_day <= @end_date
-        .calendar-cell{ id: "day-#{current_day}", data: { date: current_day } }
-          %div.day-number= current_day.day
-          .events
-            - if @events_by_date[current_day]
-              - @events_by_date[current_day].each do |event|
-                .event{ 
-                  data: { 
-                    title: event.title, 
-                    desc: event.desc, 
-                    date: event.date, 
-                    start_time: event.start_time, 
-                    end_time: event.end_time 
-                  } 
-                }
-                  = event.title
-        - current_day += 1
-
-  .side-panels
-    #new-event-panel.side-panel.hidden
-      %h2 Add New Event
-      = form_for @event do |f|
-        .field
-          = f.label :title
-          = f.text_field :title, required: true
-
-        .field
-          = f.label :desc
-          = f.text_field :desc, required: true
-
-        .field
-          = f.label :start_time
-          = f.time_field :start_time, required: true
-
-        .field
-          = f.label :end_time
-          = f.time_field :end_time, required: true
-
-        .field
-          = f.label :date
-          = f.date_field :date, readonly: true
-
-        .actions
-          = f.submit "Add Event", class: "btn"
-        .actions
-          %button.btn.close-btn{ type: "button" } Close
-
-    #event-details-panel.side-panel.hidden
-      %h2 Event Details
-      %div#event-title
-      %div#event-description
-      %div#event-date
-      %div#event-start-time
-      %div#event-end-time
-      %button.btn.close-btn{ type: "button" } Close
+.home-container
+  .main-content
+    .calendar-section
+      = render "calendar", 
+        date: @date, 
+        end_date: @end_date, 
+        start_wday: @start_wday, 
+        events_by_date: @events_by_date
+    
+    .sidebar
+      .add-event-section
+        %h2 Quick Actions
+        = link_to "Add New Event", new_event_path, class: "btn btn-primary"
+      
+      .event-details-section
+        = turbo_frame_tag "event_details", data: { controller: "event-details" } do
+          .event-details-panel.hidden{ data: { event_details_target: "panel" } }
+            %h2 Event Details
+            .event-info
+              %div.event-title{ data: { event_details_target: "title" } }
+              %div.event-description{ data: { event_details_target: "description" } }
+              %div.event-date{ data: { event_details_target: "date" } }
+              %div.event-start-time{ data: { event_details_target: "startTime" } }
+              %div.event-end-time{ data: { event_details_target: "endTime" } }
+            .event-actions
+              %button.btn.close-btn{ type: "button", data: { action: "click->event-details#close" } } Close

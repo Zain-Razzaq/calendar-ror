@@ -1,18 +1,25 @@
 class EventsController < ApplicationController
-  before_action :require_user, only: [ :create ]
+  before_action :require_user, only: [ :new, :create ]
 
-  def create
-      @event = Event.new(event_params)
-      @event.user = current_user
+  def new
+    @event = Event.new
 
-      if @event.save
-        UserMailer.eventCreationMailer(@event).deliver
-        redirect_to root_path, notice: "Event created successfully"
-      else
-        redirect_to root_path, alert: @event.errors.full_messages.join(", ")
-      end
+    if params[:date].present?
+      @event.date = Date.parse(params[:date])
+    end
   end
 
+  def create
+    @event = Event.new(event_params)
+    @event.user = current_user
+
+    if @event.save
+      UserMailer.eventCreationMailer(@event).deliver
+      redirect_to root_path, notice: "Event created successfully"
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
 
   private
 

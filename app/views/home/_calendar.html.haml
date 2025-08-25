@@ -1,0 +1,40 @@
+= turbo_frame_tag "calendar", data: { controller: "calendar" } do
+  .calendar
+    .calendar-header
+      = link_to "←", root_path(year: (date.prev_month).year, month: (date.prev_month).month), data: { turbo_frame: "calendar" }
+      %span= date.strftime("%B %Y")
+      = link_to "→", root_path(year: (date.next_month).year, month: (date.next_month).month), data: { turbo_frame: "calendar" }
+
+    .calendar-grid
+      - %w[Sun Mon Tue Wed Thu Fri Sat].each do |day|
+        .calendar-cell.header= day
+
+      - start_wday.times do
+        .calendar-cell.empty
+
+      - current_day = date
+      - while current_day <= end_date
+        .calendar-cell{ 
+          id: "day-#{current_day}", 
+          data: { 
+            date: current_day, 
+            calendar_target: "cell", 
+            action: "click->calendar#cellClicked" 
+          } 
+        }
+          %div.day-number= current_day.day
+          .events
+            - if events_by_date[current_day]
+              - events_by_date[current_day].each do |event|
+                .event{ 
+                  data: { 
+                    title: event.title, 
+                    desc: event.desc, 
+                    date: event.date, 
+                    start_time: event.start_time, 
+                    end_time: event.end_time,
+                    action: "click->calendar#eventClicked"
+                  } 
+                }
+                  = event.title
+          - current_day += 1
