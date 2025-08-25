@@ -11,6 +11,8 @@ export default class extends Controller {
         this.appendMessage(data);
       },
     });
+
+    this.scrollToBottom();
   }
 
   disconnect() {
