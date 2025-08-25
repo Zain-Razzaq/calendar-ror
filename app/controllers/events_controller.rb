@@ -1,5 +1,9 @@
 class EventsController < ApplicationController
-  before_action :require_user, only: [ :new, :create ]
+  before_action :require_user, only: [ :index, :new, :create ]
+
+  def index
+    @event = Event.new
+  end
 
   def new
     @event = Event.new

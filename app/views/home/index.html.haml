@@ -1,16 +1,14 @@
 .home-container
   .main-content
     .calendar-section
-      = render "calendar", 
+      = render "calendar/index", 
         date: @date, 
         end_date: @end_date, 
         start_wday: @start_wday, 
         events_by_date: @events_by_date
     
     .sidebar
-      .add-event-section
-        %h2 Quick Actions
-        = link_to "Add New Event", new_event_path, class: "btn btn-primary"
+      = turbo_frame_tag "events", src: events_path
       
       .event-details-section
         = turbo_frame_tag "event_details", data: { controller: "event-details" } do
@@ -24,3 +22,5 @@
               %div.event-end-time{ data: { event_details_target: "endTime" } }
             .event-actions
               %button.btn.close-btn{ type: "button", data: { action: "click->event-details#close" } } Close
+      
+      = turbo_frame_tag "messages", src: messages_path

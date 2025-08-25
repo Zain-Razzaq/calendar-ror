@@ -2,7 +2,6 @@ class HomeController < ApplicationController
   before_action :require_user, only: [ :index ]
 
   def index
-    @event = Event.new
     year  = (params[:year]  || Date.today.year).to_i
     month = (params[:month] || Date.today.month).to_i
 
@@ -13,7 +12,7 @@ class HomeController < ApplicationController
     @events_by_date = current_user.events.where(date: @date..@end_date).group_by(&:date)
 
     if request.headers["Turbo-Frame"] == "calendar"
-      render partial: "calendar", locals: {
+      render partial: "calendar/index", locals: {
         date: @date,
         end_date: @end_date,
         start_wday: @start_wday,
