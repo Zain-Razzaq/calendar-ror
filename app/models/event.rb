@@ -1,5 +1,5 @@
 class Event < ApplicationRecord
-  belongs_to :user, dependent: :destroy
+  belongs_to :user
 
   validates :title, presence: true, length: { minimum: 3 }
   validates :date, presence: true

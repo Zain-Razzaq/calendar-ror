@@ -34,7 +34,7 @@ export default class extends Controller {
     this.dateTarget.textContent = `Date: ${eventData.date}`;
 
     if (eventData.startTime) {
-      const startTime = new Date(`2000-01-01T${eventData.startTime}`);
+      const startTime = new Date(eventData.startTime);
       this.startTimeTarget.textContent = `Start Time: ${startTime.toLocaleTimeString(
         "en-US",
         {
@@ -46,7 +46,7 @@ export default class extends Controller {
     }
 
     if (eventData.endTime) {
-      const endTime = new Date(`2000-01-01T${eventData.endTime}`);
+      const endTime = new Date(eventData.endTime);
       this.endTimeTarget.textContent = `End Time: ${endTime.toLocaleTimeString(
         "en-US",
         {
