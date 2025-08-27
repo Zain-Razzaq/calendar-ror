@@ -12,6 +12,14 @@ class Event < ApplicationRecord
   private
 
   def valid_times
+    if start_time.nil?
+      errors.add(:start_time, "must be present")
+      return
+    end
+    if end_time.nil?
+      errors.add(:end_time, "must be present")
+      return
+    end
     if end_time <= start_time
       errors.add(:end_time, "must be after start time")
     end
