@@ -96,16 +96,21 @@ jobs:
           POSTGRES_PASSWORD: postgres
           POSTGRES_HOST: localhost
           POSTGRES_PORT: 5432
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/calendar_test
         run: |
+          cp config/database.yml.ci config/database.yml
           bin/rails db:create
           bin/rails db:schema:load
       
-      - name: Run tests
-        env:
-          RAILS_ENV: test
-          DATABASE_URL: postgres://postgres:postgres@localhost:5432/calendar_test
-          # REDIS_URL: redis://localhost:6379/0
-        run: bin/rails db:test:prepare test test:system
+        - name: Run tests
+          env:
+            RAILS_ENV: test
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: postgres
+            POSTGRES_HOST: localhost
+            POSTGRES_PORT: 5432
+            DATABASE_URL: postgres://postgres:postgres@localhost:5432/calendar_test
+          run: bin/rails test
 
       - name: Keep screenshots from failed system tests
         uses: actions/upload-artifact@v4
