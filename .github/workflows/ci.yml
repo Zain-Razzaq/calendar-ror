@@ -102,15 +102,15 @@ jobs:
           bin/rails db:create
           bin/rails db:schema:load
       
-        - name: Run tests
-          env:
-            RAILS_ENV: test
-            POSTGRES_USER: postgres
-            POSTGRES_PASSWORD: postgres
-            POSTGRES_HOST: localhost
-            POSTGRES_PORT: 5432
-            DATABASE_URL: postgres://postgres:postgres@localhost:5432/calendar_test
-          run: bin/rails test
+      - name: Run tests
+        env:
+          RAILS_ENV: test
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_HOST: localhost
+          POSTGRES_PORT: 5432
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/calendar_test
+        run: bin/rails test
 
       - name: Keep screenshots from failed system tests
         uses: actions/upload-artifact@v4
