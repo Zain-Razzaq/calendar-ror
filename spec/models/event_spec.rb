@@ -79,7 +79,7 @@ RSpec.describe Event, type: :model do
         date: Date.today,
         start_time: Time.current + 1.hour,
         end_time: Time.current,
-        desc: "This is a test event description",
+        desc: "test event description",
         user: user
       )
       expect(event).not_to be_valid
