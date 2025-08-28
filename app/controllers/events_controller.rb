@@ -2,7 +2,8 @@ class EventsController < ApplicationController
   before_action :require_user, only: [ :index, :new, :create ]
 
   def index
-    @event = Event.new
+    @events = Event.all
+    render json: @events
   end
 
   def new
@@ -26,9 +27,9 @@ class EventsController < ApplicationController
 
       EventReminderJob.set(wait_until: reminder_time).perform_later(@event.id)
 
-      redirect_to root_path, notice: "Event created successfully"
+      render json: @event, status: :created
     else
-      render :new, status: :unprocessable_entity
+      render json: { errors: @event.errors.full_messages }, status: :unprocessable_entity
     end
   end
 

@@ -3,7 +3,7 @@ class MessagesController < ApplicationController
 
   def index
     @messages = Message.recent
-    @message = Message.new
+    render json: @messages
   end
 
   def create
@@ -16,7 +16,7 @@ class MessagesController < ApplicationController
         created_at: @message.created_at.strftime("%H:%M")
       }
       ActionCable.server.broadcast("messages", message_data)
-      head :ok
+      render json: @message, status: :created
     else
       render json: { errors: @message.errors.full_messages }, status: :unprocessable_entity
     end
