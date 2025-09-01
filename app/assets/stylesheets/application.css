@@ -238,6 +238,14 @@ input {
   background: #2980b9;
 }
 
+.event.registered {
+  background: #27ae60;
+}
+
+.event.registered:hover {
+  background: #229954;
+}
+
 /* Sidebar Styles */
 
 .add-event-section {
@@ -272,6 +280,28 @@ input {
 
 .event-details-section {
   /* No special mobile/desktop logic needed - CSS flexbox handles it */
+}
+
+.event-details-placeholder {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  text-align: center;
+  display: none;
+}
+
+.event-details-placeholder h2 {
+  margin: 0 0 15px 0;
+  color: #2c3e50;
+  font-size: 18px;
+}
+
+.instruction-text {
+  color: #666;
+  font-style: italic;
+  margin: 0;
 }
 
 .event-info {
@@ -607,9 +637,104 @@ input {
   white-space: nowrap;
 }
 
+/* Registration Styles */
+
+.registration-page {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+.event-summary {
+  background: #f8f9fa;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.event-summary h2 {
+  margin: 0 0 10px 0;
+  color: #2c3e50;
+}
+
+.event-summary p {
+  margin: 5px 0;
+  color: #555;
+}
+
+.event-summary .price {
+  font-size: 18px;
+  font-weight: bold;
+  color: #27ae60;
+}
+
+.registration-form {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.payment-section {
+  border-top: 1px solid #eee;
+  padding-top: 20px;
+  margin-top: 20px;
+}
+
+.payment-section h3 {
+  margin: 0 0 15px 0;
+  color: #2c3e50;
+}
+
+.payment-note {
+  background: #fff3cd;
+  border: 1px solid #ffeaa7;
+  border-radius: 4px;
+  padding: 10px;
+  margin: 10px 0;
+  color: #856404;
+}
+
+.payment-summary {
+  background: #f8f9fa;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 15px;
+  margin: 15px 0;
+}
+
+.payment-summary p {
+  margin: 0;
+  font-size: 16px;
+}
+
+.registration-status {
+  padding: 10px;
+  border-radius: 4px;
+  margin: 10px 0;
+  font-weight: bold;
+}
+
+.registration-status.registered {
+  background: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
 @media (max-width: 480px) {
   .calendar-grid {
     gap: 0;
+  }
+  
+  .registration-page {
+    margin: 10px;
+    padding: 10px;
+  }
+  
+  .event-summary, .registration-form {
+    padding: 15px;
   }
   
   .calendar-cell {
@@ -642,5 +767,76 @@ input {
   .message-form .btn {
     align-self: stretch;
   }
+}
+
+/* Stripe Payment Styles */
+.stripe-payment-btn {
+  background: linear-gradient(135deg, #635bff 0%, #5a4fcf 100%);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 8px rgba(99, 91, 255, 0.2);
+}
+
+.stripe-payment-btn:hover {
+  background: linear-gradient(135deg, #5a4fcf 0%, #4f46e5 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 12px rgba(99, 91, 255, 0.3);
+  color: white;
+  text-decoration: none;
+}
+
+.payment-note {
+  background-color: #f8f9ff;
+  border: 1px solid #e6e8ff;
+  border-radius: 4px;
+  padding: 12px;
+  margin: 10px 0;
+  color: #4f46e5;
+}
+
+.payment-summary {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 15px;
+  margin: 15px 0;
+}
+
+.payment-summary p {
+  margin: 0;
+  font-size: 18px;
+}
+
+/* Payment Redirect Styles */
+.payment-redirect-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+  text-align: center;
+}
+
+.redirect-container {
+  max-width: 500px;
+  padding: 40px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.redirect-container h2 {
+  color: #635bff;
+  margin-bottom: 20px;
+}
+
+.loading-spinner {
+  margin: 20px 0;
+  color: #666;
 }
 

@@ -23,11 +23,16 @@ export default class extends Controller {
 
     const eventElement = event.currentTarget;
     const eventData = {
+      id: eventElement.dataset.id,
       title: eventElement.dataset.title,
       desc: eventElement.dataset.desc,
       date: eventElement.dataset.date,
       startTime: eventElement.dataset.startTime,
       endTime: eventElement.dataset.endTime,
+      type: eventElement.dataset.eventType,
+      price: eventElement.dataset.price,
+      registeredCount: eventElement.dataset.registeredCount,
+      userRegistered: eventElement.dataset.userRegistered === "true",
     };
 
     this.dispatch("eventSelected", {

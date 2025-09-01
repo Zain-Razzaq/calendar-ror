@@ -9,7 +9,7 @@ class HomeController < ApplicationController
     @end_date = @date.end_of_month
     @start_wday = @date.wday
 
-    @events_by_date = current_user.events.where(date: @date..@end_date).group_by(&:date)
+    @events_by_date = Event.includes(:registrations).where(date: @date..@end_date).group_by(&:date)
 
     if request.headers["Turbo-Frame"] == "calendar"
       render partial: "calendar/index", locals: {

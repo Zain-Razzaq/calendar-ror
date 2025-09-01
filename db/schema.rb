@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_25_094907) do
+ActiveRecord::Schema[8.0].define(version: 2025_09_01_075802) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -23,6 +23,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_25_094907) do
     t.date "date"
     t.time "start_time"
     t.time "end_time"
+    t.string "event_type"
+    t.float "price"
     t.index ["user_id"], name: "index_events_on_user_id"
   end
 
@@ -32,6 +34,18 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_25_094907) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
+  create_table "registrations", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "event_id", null: false
+    t.string "payment_status"
+    t.float "amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "stripe_session_id"
+    t.index ["event_id"], name: "index_registrations_on_event_id"
+    t.index ["user_id"], name: "index_registrations_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -44,4 +58,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_25_094907) do
 
   add_foreign_key "events", "users"
   add_foreign_key "messages", "users"
+  add_foreign_key "registrations", "events"
+  add_foreign_key "registrations", "users"
 end

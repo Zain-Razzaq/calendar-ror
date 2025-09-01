@@ -27,12 +27,18 @@
             - if events_by_date[current_day]
               - events_by_date[current_day].each do |event|
                 .event{ 
+                  class: ("registered" if defined?(current_user) && event.user_registered?(current_user)),
                   data: { 
+                    id: event.id,
                     title: event.title, 
                     desc: event.desc, 
                     date: event.date, 
                     start_time: event.start_time, 
                     end_time: event.end_time,
+                    event_type: event.event_type,
+                    price: event.price,
+                    registered_count: event.registered_users_count,
+                    user_registered: (defined?(current_user) && event.user_registered?(current_user)),
                     action: "click->calendar#eventClicked"
                   } 
                 }
