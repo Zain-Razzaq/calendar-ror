@@ -2,7 +2,7 @@
   .form-header
     %h1 Create New Event
 
-  .form-container
+  .form-container{ data: { controller: "event-type" } }
     = form_for @event, data: { turbo: true, controller: "form", action: "submit->form#submitForm" }, html: { class: "event-form" } do |f|
       - if @event.errors.any?
         .error-messages
@@ -34,6 +34,16 @@
         .field.half-width
           = f.label :end_time, "End Time"
           = f.time_field :end_time, required: true, class: "form-input"
+
+      .form-row
+        .field
+          = f.label :event_type, "Event Type"
+          = f.select :event_type, [['Free', 'free'], ['Paid', 'paid']], { prompt: 'Select event type' }, { required: true, class: "form-input", data: { action: "change->event-type#togglePrice" } }
+
+      .form-row{ id: "price-field", style: "display: none;" }
+        .field
+          = f.label :price, "Price ($)"
+          = f.number_field :price, step: :any, min: 0, placeholder: "0.00", class: "form-input", data: { event_type_target: "price" }
 
       .form-actions
         = f.submit "Create Event", class: "btn btn-primary", data: { form_target: "submit" }

@@ -8,10 +8,9 @@
         events_by_date: @events_by_date
     
     .sidebar
-      = turbo_frame_tag "events", src: events_path
-      
       .event-details-section
         = turbo_frame_tag "event_details", data: { controller: "event-details" } do
+          .event-details-placeholder
           .event-details-panel.hidden{ data: { event_details_target: "panel" } }
             %h2 Event Details
             .event-info
@@ -20,7 +19,11 @@
               %div.event-date{ data: { event_details_target: "date" } }
               %div.event-start-time{ data: { event_details_target: "startTime" } }
               %div.event-end-time{ data: { event_details_target: "endTime" } }
+              %div.event-type{ data: { event_details_target: "eventType" } }
+              %div.event-price{ data: { event_details_target: "price" } }
+              %div.event-registrations{ data: { event_details_target: "registrations" } }
             .event-actions
+              %div.registration-section{ data: { event_details_target: "registrationSection" } }
               %button.btn.close-btn{ type: "button", data: { action: "click->event-details#close" } } Close
       
       = turbo_frame_tag "messages", src: messages_path

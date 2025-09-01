@@ -22,6 +22,7 @@ gem "bcrypt", "~> 3.1.7"
 gem "haml-rails"
 gem "letter_opener"
 gem "sidekiq"
+gem "stripe"
 
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
