@@ -80,18 +80,23 @@ test:
 production:
   primary: &primary_production
     <<: *default
-    database: calendar_production
-    username: calendar
-    password: <%= ENV["CALENDAR_DATABASE_PASSWORD"] %>
+    database: calendar_db
+    username: <%= ENV["DATABASE_USER"] || "postgres" %>
+    password: <%= ENV["DATABASE_PASSWORD"] %>
+    host: <%= ENV["DATABASE_HOST"] || "postgres" %>
+    port: <%= ENV["DATABASE_PORT"] || 5432 %>
+
   cache:
     <<: *primary_production
-    database: calendar_production_cache
+    database: calendar_db_cache
     migrations_paths: db/cache_migrate
+
   queue:
     <<: *primary_production
-    database: calendar_production_queue
+    database: calendar_db_queue
     migrations_paths: db/queue_migrate
+
   cable:
     <<: *primary_production
-    database: calendar_production_cable
+    database: calendar_db_cable
     migrations_paths: db/cable_migrate

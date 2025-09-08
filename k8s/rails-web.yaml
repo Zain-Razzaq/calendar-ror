@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rails-web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rails-web
+  template:
+    metadata:
+      labels:
+        app: rails-web
+    spec:
+      containers:
+      - name: rails-web
+        image: rails-app:latest
+        imagePullPolicy: IfNotPresent
+        envFrom:
+          - secretRef:
+              name: rails-secret
+        env:
+        - name: DATABASE_HOST
+          value: "postgres"
+        - name: DATABASE_USER
+          value: "postgres"
+        - name: DATABASE_PASSWORD
+          value: "postgres"
+        - name: DATABASE_NAME
+          value: "calendar_db"
+        - name: DATABASE_PORT
+          value: "5432"
+        - name: REDIS_URL
+          value: "redis://redis:6379/0"
+        ports:
+        - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rails-service
+spec:
+  type: NodePort
+  ports:
+  - port: 3000
+    nodePort: 32000
+  selector:
+    app: rails-web
